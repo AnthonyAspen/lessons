@@ -1,0 +1,5 @@
+a pie
+abstraction - only exposing high level public methods for accessing an object
+polymorphism - many methods can do the same task
+inheritance - child classes inherit data and behaviors from parent class
+encapsulation - containing information in an object, exposing only selected information:
