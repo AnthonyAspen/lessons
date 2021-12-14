@@ -6,8 +6,15 @@ import "fmt"
 //trying to figure out how it works exactly
 // https://go.dev/tour/methods/14
 func testInterface (a ...interface{}){
+
 	for _,i := range a{
-	fmt.Printf("value:%v , type: %T\n",i,i)
+		_,ok := i.(int)
+		if ok {
+	 fmt.Printf("value:%v , type: %T\n",i,i)
+		} 
+
+	// s := i.(int)
+	// fmt.Printf("value:%v , type: %T\n",s,s)
 	}
 
 }
