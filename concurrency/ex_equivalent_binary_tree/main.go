@@ -2,6 +2,12 @@ package main
 
 import "golang.org/x/tour/tree"
 
+// type Tree struct {
+// 	Left  *Tree
+// 	Value int
+// 	Right *Tree
+// }
+
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int)
