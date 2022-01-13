@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+  "container/heap"
 )
 
 // MaxHeap struct has a slice that holds the array
@@ -112,7 +113,33 @@ func main(){
     }
     fmt.Println(m)
   }
+  // Container/heap check
+  h := &ContHeap{2,1,5}
+  heap.Init(h)
+  
 }
+  type ContHeap []int
+  func (contHeap ContHeap) Len() int{
+    return len(contHeap)
+  }
 
+  func (contHeap ContHeap) Less(i,j int) bool{
+    return contHeap[i]<contHeap[j]
+  }
 
+  func (contHeap ContHeap) Swap(i,j int){
+    contHeap[i],contHeap[j] = contHeap[j],contHeap[i]
+  }
+   func (h *ContHeap) Push(x interface{}) {
+	// Push and Pop use pointer receivers because they modify the slice's length,
+	// not just its contents.
+	*h = append(*h, x.(int))
+  }
 
+  func (h *ContHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+  }
