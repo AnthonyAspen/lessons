@@ -16,11 +16,23 @@ func main(){
 
   sliceAnother := []int{0,1,2,3}
 
-  fmt.Printf("result %d another result with : %d ",test(sliceAnother...),test(sliceAnother[:]...))
+  fmt.Printf("result %d another result with : %d \n",test(sliceAnother...),test(sliceAnother[:]...))
 
   slice = append(slice,sliceAnother...)
   fmt.Println(slice)
+  remove(slice,0)
+  fmt.Println(slice)
+  remove(slice,0)
+  fmt.Println(slice)
+  remove(slice,0)
+  fmt.Println(slice)
 
+
+
+}
+// remove an element from a slice 
+func remove (slice []int,s int) []int{
+  return append(slice[:s],slice[s+1:]...)
 }
 // testing how append(slice []type, elems ... Type) []type works
 
