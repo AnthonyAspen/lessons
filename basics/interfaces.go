@@ -1,50 +1,56 @@
 package main
 
-import "fmt"
+import (
+	"log"
+)
 
-// fmt.Println takes an empty interface as an argument,
-//trying to figure out how it works exactly
-// https://go.dev/tour/methods/14
-func testInterface (a ...interface{}){
+type Interface interface {
+	Square(int) (int, error)
+	Sum(int) (int, error)
+}
 
-	for _,i := range a{
-		_,ok := i.(int)
-		if ok {
-	 fmt.Printf("value:%v , type: %T\n",i,i)
-		} 
-	// s := i.(int)
-	// fmt.Printf("value:%v , type: %T\n",s,s)
+type Math struct {
+	integer int
+}
+
+func (m *Math) Square(i int) (int, error) {
+	return i * i, nil
+}
+
+func (m *Math) Sum(i int) (int, error) {
+	return i + i, nil
+}
+
+// create mock struct to pass it to testMath
+type Mock struct {
+	integer int
+}
+
+func (m *Mock) Square(i int) (int, error) {
+	return 0, nil
+}
+
+func (m *Mock) Sum(i int) (int, error) {
+	return 0, nil
+}
+
+func main() {
+	trueStruct := &Math{integer: 10}
+	mockStruct := &Mock{integer: 10}
+
+	log.Printf("TrueValue:%v,MockValue:%v", testMath(trueStruct, 10), testMath(mockStruct, 10))
+
+}
+
+func testMath(Interface Interface, i int) int {
+	sq, err := Interface.Square(i)
+	if err != nil {
+		return 0
 	}
+	su, err := Interface.Sum(i)
+	if err != nil {
+		return 0
+	}
+	return sq + su
 
-}
-////// structs
-type Engineer struct{
-	name string
-}
-type Developer struct{
-	name string
-}
-
-////// interface 
-type EmployeeInterface interface{
-	GetName() string
-}
-func (e *Engineer) GetName() string{
-	return e.name
-}
-func (d *Developer) GetName() string{
-	return d.name
-}
-
-func main(){
-	a := 42
-	b := 24.2
-	testInterface(a,b)
-	//-----------------
-	var e EmployeeInterface
-	var d EmployeeInterface
-	e = &Engineer{"Bob"}
-	d = &Developer{"Mark"}
-	fmt.Println(e.GetName())
-	fmt.Println(d.GetName())
 }

@@ -2,9 +2,16 @@ package main
 
 import "fmt"
 
-func main(){
-  for {
-    fmt.Println("hello docker and kube")
 
-  }
+func main() {
+               for i := 0; i < 10; i++ {
+                 
+                 
+               fmt.Print()
+
+               }
+
+
+
+
 }
